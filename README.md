@@ -1,4 +1,7 @@
-# This is synthesis project
-#### Back-end: Spring Boot for REST API
-#### Front-end: Angular
-#### Data Base: MySQL cloud using AlwaysData
+# Plateforme de location de logement courte durée
+## Technologies:
+## Front-end (Angular), 
+## Back-end (Spring Boot), 
+## ORM(Hibernate), 
+## Database (MySQL)
+## Swagger
