@@ -10,9 +10,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-/**
- * Created by Thomas Wang on 11/10/2022.
- */
 @RestController
 @RequestMapping("api/v1/carteCredit")
 @Api(tags = "API pour CarteCredit")
@@ -23,7 +20,7 @@ public class CarteCreditController {
     // get the credit card list
     @GetMapping("/list")
     @ApiOperation("Récupérer la list de carteCredit")
-    public List<CarteCredit> carteCreditList(){
+    public List<CarteCredit> getCarteCreditList(){
         return carteCreditService.getCreditList();
     }
 

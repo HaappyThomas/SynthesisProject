@@ -1,35 +1,39 @@
 package ca.bdeb.projetsynthese.models;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.validation.annotation.Validated;
 
 import javax.persistence.*;
 
-/**
- * Created by Thomas Wang on 10/27/2022.
- */
 @Entity
 @Table(name = "Commantaire")
 @Validated
+@ApiModel(value = "Commantaire Entity")
 public class Commantaire {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @ApiModelProperty(value = "commentaire Id")
     private int id;
 
     @Column(name = "commantaire", columnDefinition = "varchar(200)")
     @Length(min=0, max=200, message="Commantaire doit entre 0 et 200 characters")
+    @ApiModelProperty(value = "Commantaire for a logement")
     private String commantaire;
 
 
     @Column(name = "etatDeCommantaire", columnDefinition = "boolean DEFAULT true")
+    @ApiModelProperty(value = "Status of commantaire: true is valid, false is invalid")
     private boolean etatDeCommantaire;
 
     /** relation **/
     // relation(1:n) Locataire(1) <===> Commantaire(n)
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "emailLocataire",
                 referencedColumnName = "emailLocataire",
                 columnDefinition = "varchar(50)")
+    @ApiModelProperty(value = "The locataire who wrote this comment")
     private Locataire locataire;
     /** fin relation **/
 

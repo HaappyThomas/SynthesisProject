@@ -9,9 +9,6 @@ import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Thomas Wang on 10/26/2022.
- */
 @Entity
 @Table(name = "Proprietaire")
 @Validated

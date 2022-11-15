@@ -1,29 +1,32 @@
 package ca.bdeb.projetsynthese.models;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import org.springframework.validation.annotation.Validated;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
-/**
- * Created by Thomas Wang on 10/27/2022.
- */
 @Entity
 @Table(name = "DisponibiliteDeLogement")
 @Validated
+@ApiModel(value = "DisponibiliteDeLogement Entity")
 public class DisponibiliteDeLogement {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @ApiModelProperty(value = " disponibiliteDeLogementList id")
     private int id;
 
     @NotNull(message="La date de début est obligatoire")
     @Column(name = "debutDeDateDeDisponibilite")
+    @ApiModelProperty(value = " debutDeDateDeDisponibilite")
     private Date debutDeDateDeDisponibilite;
 
     @NotNull(message="La date de départ est obligatoire")
     @Column(name = "finDeDateDeDisponibilite")
+    @ApiModelProperty(value = " finDeDateDeDisponibilite")
     private Date finDeDateDeDisponibilite;
 
     /** relation **/

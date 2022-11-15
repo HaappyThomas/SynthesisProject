@@ -10,9 +10,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-/**
- * Created by Thomas Wang on 11/7/2022.
- */
 @Api(tags = "API pour secteur de hébergement")
 @RestController
 @RequestMapping("/api/v1/secteur-de-hebergement")

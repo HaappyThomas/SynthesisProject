@@ -7,9 +7,6 @@ import org.springframework.validation.annotation.Validated;
 
 import javax.persistence.*;
 
-/**
- * Created by Thomas Wang on 10/27/2022.
- */
 @Entity
 @Table(name = "SecteurDeHebergement")
 @Validated

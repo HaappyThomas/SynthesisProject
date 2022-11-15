@@ -7,9 +7,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-/**
- * Created by Thomas Wang on 11/10/2022.
- */
 @Service
 public class CarteCreditService {
     @Autowired

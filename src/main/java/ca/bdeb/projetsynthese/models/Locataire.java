@@ -1,5 +1,12 @@
 package ca.bdeb.projetsynthese.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.validation.annotation.Validated;
 
@@ -9,69 +16,79 @@ import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Thomas Wang on 10/26/2022.
- */
 @Entity
 @Table(name = "Locataire")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@ApiModel(value = "Locataire")
 // for verifying the data
 @Validated
 public class Locataire {
     @Id
     @Column(name = "emailLocataire", columnDefinition = "varchar(50)")
     @Email(message = "The email address is not a valid email address")
+    @ApiModelProperty(value = "The locataire email address")
     private String emailLocataire;
 
     @NotNull
     @Column(name = "motDePasse", columnDefinition = "varchar(25)")
     @Length(min = 6, max = 25, message="La longueur de la mot de passe doit entre 6 et 25")
+    @ApiModelProperty(value = "The locataire password")
     private String motDePasse;
 
     @Column(name = "nom", columnDefinition = "varchar(50)")
     @Length(min = 6, max = 50, message="La longueur du nom doit entre 6 et 50")
+    @ApiModelProperty(value = "The locataire last name")
     private String nom;
 
     @Column(name = "prenom", columnDefinition = "varchar(50)")
     @Length(min = 6, max = 50, message="La longueur du prénom doit entre 6 et 50")
+    @ApiModelProperty(value = "The locataire first name")
     private String prenom;
 
     @Column(name = "telephone", columnDefinition = "varchar(25)")
     @Length(min = 0, max = 25, message="La longueur du téléphone doit entre 0 et 25")
+    @ApiModelProperty(value = "The locataire telephone")
     private String telephone;
 
     @Column(name = "etatDeLocataire", columnDefinition = "boolean DEFAULT true")
+    @ApiModelProperty(value = "The locataire status")
     private boolean etatDeLocataire;
 
     /**
      * relation
      **/
     // relation(1:1) Locataire(1) ===> Adresse(1)
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "idAdresse", referencedColumnName = "id")
     private Adresse adresse;
 
     // relation(1:n) Locataire(1) <===> Commantaire(n)
-    @OneToMany(mappedBy = "locataire",
-            fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "locataire")
+    // pour evider nested exception
+//    @JsonIgnoreProperties(value ={"locataire"})
+    @JsonIgnore
     private List<Commantaire> commantaireList = new ArrayList<>();
 
     // relation(1:n) Locataire(1) <===> Facture(n)
-    @OneToMany(mappedBy = "locataire",
-            fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "locataire")
+    // pour evider nested exception
+//    @JsonIgnoreProperties(value ={"locataire"})
+    @JsonIgnore
     private List<Facture> factureList = new ArrayList<>();
 
     // relation(1:n) Locataire(1) <===> Reservation(n)
-    @OneToMany(mappedBy = "locataire",
-            fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "locataire")
+    // pour evider nested exception
+//    @JsonIgnoreProperties(value ={"locataire"})
+    @JsonIgnore
     private List<Reservation> reservationList = new ArrayList<>();
 
     /**
      * fin relation
      **/
-
+/**
     // constructor
     public Locataire() {
     }
@@ -176,16 +193,17 @@ public class Locataire {
 //        this.reservationList = reservationList;
 //    }
 
-    @Override
-    public String toString() {
-        return "Locataire{" +
-                "emailLocataire='" + emailLocataire + '\'' +
-                ", motDePasse='" + motDePasse + '\'' +
-                ", nom='" + nom + '\'' +
-                ", prenom='" + prenom + '\'' +
-                ", telephone='" + telephone + '\'' +
-                ", etatDeLocataire=" + etatDeLocataire +
-                ", adresse=" + adresse +
-                '}';
-    }
+//    @Override
+//    public String toString() {
+//        return "Locataire{" +
+//                "emailLocataire='" + emailLocataire + '\'' +
+//                ", motDePasse='" + motDePasse + '\'' +
+//                ", nom='" + nom + '\'' +
+//                ", prenom='" + prenom + '\'' +
+//                ", telephone='" + telephone + '\'' +
+//                ", etatDeLocataire=" + etatDeLocataire +
+//                ", adresse=" + adresse +
+//                '}';
+//    }
+ **/
 }

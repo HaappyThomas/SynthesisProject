@@ -1,17 +1,18 @@
 package ca.bdeb.projetsynthese.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.validation.annotation.Validated;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Min;
-import java.util.ArrayList;
+
+import java.util.AbstractList;
 import java.util.List;
 
-/**
- * Created by Thomas Wang on 10/27/2022.
- */
+
 @Entity
 @Table(name = "Hebergement")
 @Validated
@@ -23,7 +24,7 @@ public class Hebergement {
 
     @NotNull
     @Column(name = "prix", columnDefinition = "float(10) DEFAULT 0.00")
-    @Min(value=0, message="Le prix doit supérieur 0")
+    @Min(value=0, message="Le prix doit  etre supérieur 0")
     private float prix;
 
     @NotNull
@@ -47,32 +48,62 @@ public class Hebergement {
     // relation(1:1) Hebergement(1) ===> Adresse(1)
     @OneToOne
     @JoinColumn(name = "idAdresse")
+    @JsonIgnoreProperties(value = {"adresse"})
     private Adresse adresse;
 
     // relation(1:n) Proprietaire(1) <===> Hebergement(n)
     @ManyToOne(cascade = CascadeType.ALL)
+
     @JoinColumn(name = "emailProprietaire",
-                referencedColumnName = "emailProprietaire",
-                columnDefinition = "varchar(50)")
+            referencedColumnName = "emailProprietaire",
+            columnDefinition = "varchar(50)")
+    @JsonIgnore
     private Proprietaire proprietaire;
 
     // relation(1:1) Hebergement(1) ===> TypeDeHebergement(1)
     @OneToOne
     @JoinColumn(name = "idTypeDeHebergement")
+    @JsonIgnore
     private TypeDeHebergement typeDeHebergement;
 
     // relation(1:1) Hebergement(1) ===> SecteurDeHebergement(1)
     @OneToOne
     @JoinColumn(name = "idSecteurDeHebergement")
+    @JsonIgnoreProperties(value = {"secteurDeHebergement"})
     private SecteurDeHebergement secteurDeHebergement;
 
     // relation(1:n) Hebergement(1) <===> DisponibiliteDeLogement(n)
     @OneToMany(mappedBy = "hebergement")
-    private List<DisponibiliteDeLogement> disponibiliteDeLogementList = new ArrayList<>();
+    @JsonIgnore
+    private List<DisponibiliteDeLogement> disponibiliteDeLogementList = new AbstractList<DisponibiliteDeLogement>() {
+        @Override
+        public DisponibiliteDeLogement get(int index) {
+            return null;
+        }
+
+        @Override
+        public int size() {
+            return 0;
+        }
+    };
     /** fin relation **/
 
     // constructor
     public Hebergement() {
+    }
+
+    public Hebergement(int id, float prix, float fraisDeNettoyage, float fraisDeService, String repertoireDePhoto, boolean etatDeHebergement, Adresse adresse, Proprietaire proprietaire, TypeDeHebergement typeDeHebergement, SecteurDeHebergement secteurDeHebergement) {
+
+        this.id = id;
+        this.prix = prix;
+        this.fraisDeNettoyage = fraisDeNettoyage;
+        this.fraisDeService = fraisDeService;
+        this.repertoireDePhoto = repertoireDePhoto;
+        this.etatDeHebergement = etatDeHebergement;
+        this.adresse = adresse;
+        this.proprietaire = proprietaire;
+        this.typeDeHebergement = typeDeHebergement;
+        this.secteurDeHebergement = secteurDeHebergement;
     }
 
     public Hebergement(float prix,

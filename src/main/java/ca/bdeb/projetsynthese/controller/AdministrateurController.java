@@ -10,9 +10,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-/**
- * Created by Thomas Wang on 10/31/2022.
- */
 @Api(tags = "API pour administrateur")
 @RestController
 @RequestMapping("/api/v1/administrateur")

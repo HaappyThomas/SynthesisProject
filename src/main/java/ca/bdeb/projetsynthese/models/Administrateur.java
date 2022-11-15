@@ -10,10 +10,6 @@ import org.springframework.validation.annotation.Validated;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-/**
- * Created by Thomas Wang on 10/26/2022.
- */
-
 @Entity
 @Table(name = "Administrateur")
 @Validated

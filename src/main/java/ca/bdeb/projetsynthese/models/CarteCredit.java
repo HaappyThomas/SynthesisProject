@@ -10,9 +10,6 @@ import javax.validation.constraints.Future;
 import java.time.LocalDate;
 import java.util.Date;
 
-/**
- * Created by Thomas Wang on 10/27/2022.
- */
 @Entity
 @Table(name = "CarteCredit")
 @Validated
