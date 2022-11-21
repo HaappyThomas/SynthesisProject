@@ -1,6 +1,6 @@
 package ca.bdeb.projetsynthese.services;
 
-import ca.bdeb.projetsynthese.dao.AdresseRepository;
+import ca.bdeb.projetsynthese.dao.IAdresseRepository;
 import ca.bdeb.projetsynthese.models.Adresse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,7 +10,7 @@ import java.util.List;
 @Service
 public class AdresseService {
     @Autowired
-    private AdresseRepository repository;
+    private IAdresseRepository repository;
 
     // get adresse list
     public List<Adresse> getAdresseList() {

@@ -15,35 +15,35 @@ import java.util.List;
 @RequestMapping("/api/v1/secteur-de-hebergement")
 public class SecteurDeHebergementController {
     @Autowired
-    private SecteurDeHebergementService secteurDeHebergementService;
+    private SecteurDeHebergementService service;
 
     @ApiOperation(value = "Récupérer la list secteur de hébergement")
     @GetMapping("/list")
     public List<SecteurDeHebergement> getSecteurDeHebergementList() {
-        return secteurDeHebergementService.getSecteurDeHebergementList();
+        return service.getSecteurDeHebergementList();
     }
 
     @ApiOperation(value = "Récupérer secteurDeHebergementService spécifié par id")
     @GetMapping("/{id}")
     public SecteurDeHebergement getSecteurDeHebergement(@ApiParam("Secteur Id") @PathVariable Integer id){
-        return secteurDeHebergementService.getSecteurDeHebergementById(id);
+        return service.getSecteurDeHebergementById(id);
     }
 
     @ApiOperation(value = "Ajouter un secteur de Hébergement")
     @PostMapping("/add")
     public SecteurDeHebergement addSecteurDeHebergement(@RequestBody SecteurDeHebergement secteurDeHebergement){
-        return secteurDeHebergementService.addSecteurDeHebergement(secteurDeHebergement);
+        return service.addSecteurDeHebergement(secteurDeHebergement);
     }
 
     @ApiOperation(value = "Modifier un secteur de Hébergement")
     @PutMapping("/update")
     public SecteurDeHebergement updateSecteurDeHebergement(@RequestBody SecteurDeHebergement secteurDeHebergement){
-        return secteurDeHebergementService.updateSecteurDeHebergement(secteurDeHebergement);
+        return service.updateSecteurDeHebergement(secteurDeHebergement);
     }
 
     @ApiOperation(value = "Supprimer un secteur de Héberge")
     @DeleteMapping("/delete/{id}")
     public void deleteSecteurDeHebergement(@ApiParam("Secteur Id") @PathVariable Integer id){
-        secteurDeHebergementService.deleteSecteurDeHebergement(id);
+        service.deleteSecteurDeHebergement(id);
     }
 }

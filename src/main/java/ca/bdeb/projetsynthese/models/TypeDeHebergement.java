@@ -2,11 +2,19 @@ package ca.bdeb.projetsynthese.models;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.validation.annotation.Validated;
 
 import javax.persistence.*;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "TypeDeHebergement")
 @Validated
@@ -23,6 +31,11 @@ public class TypeDeHebergement {
     @ApiModelProperty(value = "Type De Hebergement")
     private String typeDeHebergement;
 
+    // constructor without id
+    public TypeDeHebergement(String typeDeHebergement) {
+        this.typeDeHebergement = typeDeHebergement;
+    }
+    /**
     // constructor
     public TypeDeHebergement() {
     }
@@ -50,4 +63,5 @@ public class TypeDeHebergement {
                 ", typeDeHebergement='" + typeDeHebergement + '\'' +
                 '}';
     }
+    **/
 }

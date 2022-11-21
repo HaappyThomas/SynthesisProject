@@ -15,42 +15,42 @@ import java.util.List;
 @RequestMapping("/api/v1/administrateur")
 public class AdministrateurController {
     @Autowired
-    private AdministrateurService AdministrateurService;
+    private AdministrateurService service;
 
     @ApiOperation(value = "Récupérer la list d'administrateur")
     @GetMapping("/list")
     public List<Administrateur> findAllAdministrateurs(){
-        return AdministrateurService.getAdministrateurList();
+        return service.getAdministrateurList();
     }
 
     @ApiOperation(value = "Récupérer l'administrateur spécifié par id")
     @GetMapping("/{id}")
     public Administrateur findAdministrateurById(@ApiParam("Administrateur Id") @PathVariable int id){
-        return AdministrateurService.getAdministrateurById(id);
+        return service.getAdministrateurById(id);
     }
 
     @ApiOperation(value = "Récupérer l'administrateur spécifié par nom'")
     @GetMapping("/name/{name}")
     public Administrateur findAdministrateurByName(@ApiParam("Administrateur name") @PathVariable String name){
-        return AdministrateurService.getAdministrateurByName(name);
+        return service.getAdministrateurByName(name);
     }
 
     @ApiOperation(value = "Ajouter un nouvel administrateur")
     @PostMapping("/add")
     public Administrateur addAdministrateur(@RequestBody Administrateur administrateur){
-        return AdministrateurService.addAdministrateur(administrateur);
+        return service.addAdministrateur(administrateur);
     }
 
     @ApiOperation(value = "Modifer un administrateur existe")
     @PutMapping("/update")
     public Administrateur updateAdministrateur(@RequestBody Administrateur administrate){
-        return AdministrateurService.updateAdministrateur(administrate);
+        return service.updateAdministrateur(administrate);
     }
 
     @ApiOperation(value = "Supprimer un administrateur")
     @DeleteMapping("/delete/{id}")
     public void deleteAdministrateur(@ApiParam("Administrateur Id") @PathVariable Integer id){
-        AdministrateurService.deleteAdministrateur(id);
+        service.deleteAdministrateur(id);
     }
 
     ////////////////////////////////////////////////////////////////

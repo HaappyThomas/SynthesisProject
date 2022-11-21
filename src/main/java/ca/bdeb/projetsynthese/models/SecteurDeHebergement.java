@@ -2,11 +2,19 @@ package ca.bdeb.projetsynthese.models;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.validation.annotation.Validated;
 
 import javax.persistence.*;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "SecteurDeHebergement")
 @Validated
@@ -23,6 +31,12 @@ public class SecteurDeHebergement {
     @ApiModelProperty("Sector name")
     private String secteurDeHebergement;
 
+    // constructor without id
+    public SecteurDeHebergement(String secteurDeHebergement) {
+        this.secteurDeHebergement = secteurDeHebergement;
+    }
+
+    /**
     // constructor
     public SecteurDeHebergement() {
     }
@@ -50,4 +64,6 @@ public class SecteurDeHebergement {
                 ", secteurDeHebergement='" + secteurDeHebergement + '\'' +
                 '}';
     }
+    **/
+
 }

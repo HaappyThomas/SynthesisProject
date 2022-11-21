@@ -1,7 +1,7 @@
 package ca.bdeb.projetsynthese.services;
 
-import ca.bdeb.projetsynthese.dao.FactureRepository;
-import ca.bdeb.projetsynthese.dao.LocataireRepository;
+import ca.bdeb.projetsynthese.dao.IFactureRepository;
+import ca.bdeb.projetsynthese.dao.ILocataireRepository;
 import ca.bdeb.projetsynthese.models.Facture;
 import ca.bdeb.projetsynthese.models.Locataire;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,10 +12,10 @@ import java.util.List;
 @Service
 public class FactureService {
     @Autowired
-    private FactureRepository repository;
+    private IFactureRepository repository;
 
     @Autowired
-    private LocataireRepository locataireRepository;
+    private ILocataireRepository ILocataireRepository;
 
     // get facture list
     public List<Facture> getFactureList() {
@@ -31,7 +31,7 @@ public class FactureService {
     public Facture addFacture(Facture facture) {
         // get locataire for the facture
         Locataire locataire =
-                locataireRepository.findByEmailLocataire(facture.getLocataire().getEmailLocataire());
+                ILocataireRepository.findByEmailLocataire(facture.getLocataire().getEmailLocataire());
         facture.setLocataire(locataire);
         return repository.save(facture);
     }
@@ -42,7 +42,7 @@ public class FactureService {
         if (factureExiste != null) {
             factureExiste = facture;
             Locataire locataire =
-                    locataireRepository.findByEmailLocataire(facture.getLocataire().getEmailLocataire());
+                    ILocataireRepository.findByEmailLocataire(facture.getLocataire().getEmailLocataire());
             factureExiste.setLocataire(locataire);
             return repository.save(factureExiste);
         } else {

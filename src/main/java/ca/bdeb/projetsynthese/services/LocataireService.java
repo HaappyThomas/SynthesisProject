@@ -1,7 +1,7 @@
 package ca.bdeb.projetsynthese.services;
 
-import ca.bdeb.projetsynthese.dao.AdresseRepository;
-import ca.bdeb.projetsynthese.dao.LocataireRepository;
+import ca.bdeb.projetsynthese.dao.IAdresseRepository;
+import ca.bdeb.projetsynthese.dao.ILocataireRepository;
 import ca.bdeb.projetsynthese.models.Adresse;
 import ca.bdeb.projetsynthese.models.Locataire;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,9 +12,9 @@ import java.util.List;
 @Service
 public class LocataireService {
     @Autowired
-    private LocataireRepository repository;
+    private ILocataireRepository repository;
     @Autowired
-    private AdresseRepository adresseRepository;
+    private IAdresseRepository IAdresseRepository;
 
     // get locataire list
     public List<Locataire> getLocataireList() {
@@ -29,7 +29,7 @@ public class LocataireService {
     // add a locataire
     public Locataire addLocataire(Locataire locataire) {
         // chercher adresse dans la DB
-        Adresse adresse = adresseRepository.findById(locataire.getAdresse().getId()).get();
+        Adresse adresse = IAdresseRepository.findById(locataire.getAdresse().getId()).get();
         locataire.setAdresse(adresse);
         return repository.save(locataire);
     }
@@ -41,7 +41,7 @@ public class LocataireService {
         if (locataireExiste != null) {
             locataireExiste = locataire;
             // chercher adresse dans la DB
-            Adresse adresse = adresseRepository.findById(locataire.getAdresse().getId()).get();
+            Adresse adresse = IAdresseRepository.findById(locataire.getAdresse().getId()).get();
             locataireExiste.setAdresse(adresse);
             return repository.save(locataireExiste);
         } else {

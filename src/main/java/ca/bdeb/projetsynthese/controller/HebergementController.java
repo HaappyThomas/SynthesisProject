@@ -1,6 +1,6 @@
 package ca.bdeb.projetsynthese.controller;
 
-import ca.bdeb.projetsynthese.models.Administrateur;
+import ca.bdeb.projetsynthese.dto.CritereHebergement;
 import ca.bdeb.projetsynthese.models.Hebergement;
 
 import ca.bdeb.projetsynthese.services.HebergementService;
@@ -20,42 +20,43 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:4200")
 public class HebergementController {
     @Autowired
-    private HebergementService hebergementService;
+    private HebergementService service;
 
     @ApiOperation(value = "Récupérer la list des hebergements")
-    @GetMapping("/listHebergement")
-
-    public List<Hebergement> findAllHebergement()  {
-
-        return hebergementService.getListHebergement();
+    @GetMapping("/list")
+    public List<Hebergement> getList()  {
+        return service.getList();
     }
 
     @ApiOperation(value = "Récupérer l'hebergement spécifié par id")
     @GetMapping("/{id}")
-    public Hebergement findHebergementById(@ApiParam("Hebergement Id") @PathVariable int id){
-        return hebergementService.getAdministrateurById(id);
+    public Hebergement getById(@ApiParam("Hebergement Id") @PathVariable int id){
+        return service.getById(id);
     }
-
-
 
     @ApiOperation(value = "Ajouter un nouvel hebergement")
     @PostMapping("/add")
-    public Hebergement addHebergement(@RequestBody Hebergement hebergement){
-        return hebergementService.addHebergement(hebergement);
+    public Hebergement add(@RequestBody Hebergement hebergement){
+        return service.add(hebergement);
     }
 
     @ApiOperation(value = "Modifer un hebergement")
     @PutMapping("/update")
-    public Hebergement updateHebergement(@RequestBody Hebergement hebergement){
-        return hebergementService.updateHebergement(hebergement);
+    public Hebergement update(@RequestBody Hebergement hebergement){
+        return service.update(hebergement);
     }
 
     @ApiOperation(value = "Supprimer un hebergement")
     @DeleteMapping("/delete/{id}")
-    public void deleteHebergement(@ApiParam("Hebergement Id") @PathVariable Integer id){
-        hebergementService.deleteHebergement(id);
+    public void delete(@ApiParam("Hebergement Id") @PathVariable Integer id){
+        service.delete(id);
     }
 
+    @ApiOperation(value = "Récupérer la liste de l'hébergement par requête critère")
+    @GetMapping("/critere")
+    public List<Hebergement> list(@RequestBody CritereHebergement critereHebergement){
+        return service.getListByCriteria(critereHebergement);
+    }
 
 
 }

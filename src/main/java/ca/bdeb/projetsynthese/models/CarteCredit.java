@@ -2,6 +2,10 @@ package ca.bdeb.projetsynthese.models;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.validation.annotation.Validated;
 
@@ -10,6 +14,10 @@ import javax.validation.constraints.Future;
 import java.time.LocalDate;
 import java.util.Date;
 
+@Setter
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "CarteCredit")
 @Validated
@@ -26,6 +34,7 @@ public class CarteCredit {
     @ApiModelProperty(value = "Expiration date")
     private LocalDate expiration;
 
+    /**
     // constructor
     public CarteCredit() {
     }
@@ -58,4 +67,5 @@ public class CarteCredit {
                 ", expiration=" + expiration +
                 '}';
     }
+    **/
 }

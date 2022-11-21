@@ -1,9 +1,8 @@
 package ca.bdeb.projetsynthese.services;
 
-import ca.bdeb.projetsynthese.dao.AdresseRepository;
-import ca.bdeb.projetsynthese.dao.CommentaireRepository;
-import ca.bdeb.projetsynthese.dao.LocataireRepository;
-import ca.bdeb.projetsynthese.models.Adresse;
+import ca.bdeb.projetsynthese.dao.IAdresseRepository;
+import ca.bdeb.projetsynthese.dao.ICommentaireRepository;
+import ca.bdeb.projetsynthese.dao.ILocataireRepository;
 import ca.bdeb.projetsynthese.models.Commantaire;
 import ca.bdeb.projetsynthese.models.Locataire;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,13 +13,13 @@ import java.util.List;
 @Service
 public class CommentaireService {
     @Autowired
-    private CommentaireRepository repository;
+    private ICommentaireRepository repository;
 
     @Autowired
-    private LocataireRepository locataireRepository;
+    private ILocataireRepository ILocataireRepository;
 
     @Autowired
-    private AdresseRepository adresseRepository;
+    private IAdresseRepository IAdresseRepository;
 
 
     // get all commentaires
@@ -36,7 +35,7 @@ public class CommentaireService {
     // add commantaire
     public Commantaire addCommantaire(Commantaire commantaire) {
         Locataire locataire =
-                locataireRepository.findByEmailLocataire(commantaire.getLocataire().getEmailLocataire());
+                ILocataireRepository.findByEmailLocataire(commantaire.getLocataire().getEmailLocataire());
 
         commantaire.setLocataire(locataire);
         return repository.save(commantaire);
@@ -47,7 +46,7 @@ public class CommentaireService {
         Commantaire commantaireExist = repository.findById(commantaire.getId()).get();
         if (commantaireExist != null) {
             Locataire locataire =
-                    locataireRepository.findByEmailLocataire(commantaire.getLocataire().getEmailLocataire());
+                    ILocataireRepository.findByEmailLocataire(commantaire.getLocataire().getEmailLocataire());
             commantaire.setLocataire(locataire);
             return repository.save(commantaire);
         }else{

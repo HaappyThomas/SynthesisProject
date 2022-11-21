@@ -5,6 +5,7 @@ import ca.bdeb.projetsynthese.services.LocataireService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,7 +23,7 @@ public class LocataireController {
         return service.getLocataireList();
     }
 
-    @ApiOperation(value = "Récupérer le locataire spécifié by emmail")
+    @ApiOperation(value = "Récupérer le locataire spécifié by email")
     @GetMapping("/{email}")
     public Locataire getLocataireByEmail(@PathVariable("email") String email){
         return service.getLocataireByEmail(email);

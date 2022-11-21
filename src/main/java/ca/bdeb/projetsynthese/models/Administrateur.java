@@ -4,12 +4,20 @@ package ca.bdeb.projetsynthese.models;
 //import org.hibernate.validator.constraints.Length;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.validation.annotation.Validated;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
+@Setter
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "Administrateur")
 @Validated
@@ -33,6 +41,7 @@ public class Administrateur {
     @ApiModelProperty(value = "Mot de passe d'administrateur")
     private String motDePasse;
 
+    /**
     // constructor
     public Administrateur() {
     }
@@ -71,4 +80,6 @@ public class Administrateur {
                 ", motDePasse='" + motDePasse + '\'' +
                 '}';
     }
+    **/
+
 }
