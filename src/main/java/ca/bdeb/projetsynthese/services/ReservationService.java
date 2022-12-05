@@ -177,4 +177,8 @@ public class ReservationService {
 
         repository.delete(reservation);
     }
+
+    public List<Reservation> getListByLocataire(String email) {
+        return repository.getListByEmail(email);
+    }
 }

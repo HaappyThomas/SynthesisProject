@@ -1,7 +1,11 @@
 package ca.bdeb.projetsynthese.services;
 
 import ca.bdeb.projetsynthese.dao.IAdministrateurRepository;
+import ca.bdeb.projetsynthese.dto.LoginDTO;
 import ca.bdeb.projetsynthese.models.Administrateur;
+import ca.bdeb.projetsynthese.models.Proprietaire;
+import ca.bdeb.projetsynthese.vo.AdministrateurLoginVO;
+import ca.bdeb.projetsynthese.vo.ProprietaireLoginVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -41,5 +45,18 @@ public class AdministrateurService {
     // supprimer un administrateur
     public void deleteAdministrateur(Integer id) {
         repository.deleteById(id);
+    }
+
+    public AdministrateurLoginVO login(LoginDTO loginDTO) {
+        Administrateur administrateur = repository.findByNomAdministrateur(loginDTO.getEmail());
+        if (administrateur != null) {
+            if (administrateur.getMotDePasse().equals(loginDTO.getPassword())) {
+                return new AdministrateurLoginVO("Bienvenu " + administrateur.getNomAdministrateur(), administrateur);
+            }else{
+                return new AdministrateurLoginVO("Mot de passe n'est pas correct!", null);
+            }
+        }else{
+            return new AdministrateurLoginVO("Utilisateur n'exist pas, S'inscrire S.V.P",null);
+        }
     }
 }
