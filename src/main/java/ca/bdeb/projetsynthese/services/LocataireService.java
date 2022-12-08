@@ -2,11 +2,13 @@ package ca.bdeb.projetsynthese.services;
 
 import ca.bdeb.projetsynthese.dao.IAdresseRepository;
 import ca.bdeb.projetsynthese.dao.ILocataireRepository;
+import ca.bdeb.projetsynthese.dto.LocataireDTO;
 import ca.bdeb.projetsynthese.dto.LoginDTO;
 import ca.bdeb.projetsynthese.models.Adresse;
 import ca.bdeb.projetsynthese.models.Locataire;
 import ca.bdeb.projetsynthese.vo.AdministrateurLoginVO;
 import ca.bdeb.projetsynthese.vo.LocataireLoginVO;
+import ca.bdeb.projetsynthese.vo.LocataireVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,11 +32,25 @@ public class LocataireService {
     }
 
     // add a locataire
-    public Locataire addLocataire(Locataire locataire) {
+    public LocataireVO addLocataire(LocataireDTO locataireDTO) {
         // ajouter l'adresse dans la DB
-        Adresse adresse = IAdresseRepository.save(locataire.getAdresse());
+        Adresse adresse = IAdresseRepository.findById(1).get();
+        Locataire locataire = new Locataire();
+        locataire.setEmailLocataire(locataireDTO.getEmailLocataire());
+        locataire.setMotDePasse(locataireDTO.getMotDePasse());
+        locataire.setNom(locataireDTO.getNom());
+        locataire.setPrenom(locataireDTO.getPrenom());
+        locataire.setTelephone(locataireDTO.getTelephone());
+        locataire.setEtatDeLocataire(true);
         locataire.setAdresse(adresse);
-        return repository.save(locataire);
+        locataire = repository.save(locataire);
+
+        return new LocataireVO(
+         locataire.getEmailLocataire(),
+         locataire.getMotDePasse(),
+         locataire.getPrenom(),
+         locataire.getTelephone()
+        );
     }
 
     // update a locataire

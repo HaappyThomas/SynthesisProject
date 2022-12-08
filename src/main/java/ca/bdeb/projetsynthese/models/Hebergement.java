@@ -1,5 +1,6 @@
 package ca.bdeb.projetsynthese.models;
 
+import ca.bdeb.projetsynthese.dto.HebergementDTO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
@@ -78,6 +79,14 @@ public class Hebergement {
     @JsonIgnore
 //    @JsonIgnoreProperties(value ={"hebergement"})
     private List<IndisponibiliteDeLogement> indisponibiliteDeLogementList = new ArrayList<>();
+
+    // translate to HebergementDTO
+    public HebergementDTO asDTO(){
+        return new HebergementDTO(this.id, this.prix,this.fraisDeNettoyage,
+                this.fraisDeService, this.repertoireDePhoto, this.etatDeHebergement,
+                this.adresse, this.typeDeHebergement, this.secteurDeHebergement,
+                null);
+    }
 
     /**
      private List<IndisponibiliteDeLogement> indisponibiliteDeLogementList = new AbstractList<IndisponibiliteDeLogement>()

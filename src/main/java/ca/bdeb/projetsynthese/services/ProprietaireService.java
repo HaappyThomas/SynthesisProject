@@ -3,9 +3,11 @@ package ca.bdeb.projetsynthese.services;
 import ca.bdeb.projetsynthese.dao.IAdresseRepository;
 import ca.bdeb.projetsynthese.dao.IProprietaireRepository;
 import ca.bdeb.projetsynthese.dto.LoginDTO;
+import ca.bdeb.projetsynthese.dto.ProprietaireDTO;
 import ca.bdeb.projetsynthese.models.Adresse;
 import ca.bdeb.projetsynthese.models.Proprietaire;
 import ca.bdeb.projetsynthese.vo.ProprietaireLoginVO;
+import ca.bdeb.projetsynthese.vo.ProprietaireVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,11 +31,25 @@ public class ProprietaireService {
     }
 
     // add proprietaire
-    public Proprietaire add(Proprietaire proprietaire) {
-        Adresse adresse =
-                adresseRepository.findById(proprietaire.getAdresse().getId()).get();
+    public ProprietaireVO add(ProprietaireDTO proprietaireDTO) {
+        Adresse adresse = adresseRepository.findById(1).get();
+        System.out.println("===========> adresse" + adresse.toString());
+        Proprietaire proprietaire = new Proprietaire();
+        proprietaire.setEmailProprietaire(proprietaireDTO.getEmailProprietaire());
+        proprietaire.setMotDePasse(proprietaireDTO.getMotDePasse());
+        proprietaire.setNom(proprietaireDTO.getNom());
+        proprietaire.setPrenom(proprietaireDTO.getPrenom());
+        proprietaire.setTelephone(proprietaireDTO.getTelephone());
+        proprietaire.setEtatDeProprietaire(true);
         proprietaire.setAdresse(adresse);
-        return repository.save(proprietaire);
+        proprietaire = repository.save(proprietaire);
+
+
+        return new ProprietaireVO(
+                proprietaire.getEmailProprietaire(),
+                proprietaire.getNom(),
+                proprietaire.getPrenom(),
+                proprietaire.getTelephone());
     }
 
     // update proprietaire
@@ -64,11 +80,11 @@ public class ProprietaireService {
         if (proprietaire != null) {
             if (proprietaire.getMotDePasse().equals(loginDTO.getPassword())) {
                 return new ProprietaireLoginVO("Bienvenu " + proprietaire.getPrenom(), proprietaire);
-            }else{
+            } else {
                 return new ProprietaireLoginVO("Mot de passe n'est pas correct!", null);
             }
-        }else{
-            return new ProprietaireLoginVO("Utilisateur n'exist pas, S'inscrire S.V.P",null);
+        } else {
+            return new ProprietaireLoginVO("Utilisateur n'exist pas, S'inscrire S.V.P", null);
         }
     }
 

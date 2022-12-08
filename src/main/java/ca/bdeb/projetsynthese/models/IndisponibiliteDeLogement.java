@@ -1,5 +1,6 @@
 package ca.bdeb.projetsynthese.models;
 
+import ca.bdeb.projetsynthese.dto.IndisponibiliteDeLogementDTO;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -51,6 +52,10 @@ public class IndisponibiliteDeLogement {
         this.debutDeDateDeIndisponibilite = debutDeDateDeIndisponibilite;
         this.finDeDateDeIndisponibilite = finDeDateDeIndisponibilite;
         this.hebergement = hebergement;
+    }
+
+    IndisponibiliteDeLogementDTO asDTO(){
+        return new IndisponibiliteDeLogementDTO(this.id,this.debutDeDateDeIndisponibilite,this.finDeDateDeIndisponibilite);
     }
 
     /**

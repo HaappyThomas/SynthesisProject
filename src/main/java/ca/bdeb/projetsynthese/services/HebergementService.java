@@ -2,12 +2,14 @@ package ca.bdeb.projetsynthese.services;
 
 import ca.bdeb.projetsynthese.dao.*;
 import ca.bdeb.projetsynthese.dto.CritereHebergementDTO;
+import ca.bdeb.projetsynthese.dto.HebergementDTO;
 import ca.bdeb.projetsynthese.dto.IndisponibiliteDeLogementDTO;
 import ca.bdeb.projetsynthese.models.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -92,10 +94,10 @@ public class HebergementService {
      * method is for get available herbergement avec his indisponibilite list
      *
      * @param critereHebergementDTO critere hebergement of the request
-     * @return map available with his indisponibilite list
+     * @return list hebergement available with his indisponibilite list
      * if indisponibilite list is null, it means hebergement is available all time
      */
-    public Map<Integer, List<IndisponibiliteDeLogementDTO>> getListByCriteria(CritereHebergementDTO critereHebergementDTO) {
+    public List<HebergementDTO> getListByCriteria(CritereHebergementDTO critereHebergementDTO) {
         // data preparation, read the data related into memory to reduce response time
         //// get all indisponibilite
         List<IndisponibiliteDeLogementDTO> listIndispoDTO = indisponibiliteRepository.findAllDTO();
@@ -234,7 +236,17 @@ public class HebergementService {
             }
         }
         // final result: we have a map available
+        System.out.println("mapAvailable====>" + mapAvailable);
 
-        return mapAvailable;
+        // translate map to list for front-end
+        List<HebergementDTO> hebergementDTOList = new ArrayList<HebergementDTO>();
+        if(mapAvailable.size() > 0) {
+            mapAvailable.forEach((k, v)->{
+               HebergementDTO hebergementDTO = repository.findById(k).get().asDTO();
+               hebergementDTO.setIndisponibiliteDeLogementListDTO(v);
+               hebergementDTOList.add(hebergementDTO);
+            });
+        }
+        return hebergementDTOList;
     }
 }

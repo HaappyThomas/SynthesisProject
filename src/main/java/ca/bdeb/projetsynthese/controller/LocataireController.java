@@ -1,10 +1,12 @@
 package ca.bdeb.projetsynthese.controller;
 
+import ca.bdeb.projetsynthese.dto.LocataireDTO;
 import ca.bdeb.projetsynthese.dto.LoginDTO;
 import ca.bdeb.projetsynthese.models.Locataire;
 import ca.bdeb.projetsynthese.services.LocataireService;
 import ca.bdeb.projetsynthese.vo.AdministrateurLoginVO;
 import ca.bdeb.projetsynthese.vo.LocataireLoginVO;
+import ca.bdeb.projetsynthese.vo.LocataireVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,8 +52,8 @@ public class LocataireController {
 
     @ApiOperation(value = "Ajouter un nouveau locataire")
     @PostMapping("/add")
-    public Locataire addLocataire(@RequestBody Locataire locataire){
-        return service.addLocataire(locataire);
+    public LocataireVO addLocataire(@RequestBody LocataireDTO locataireDTO){
+        return service.addLocataire(locataireDTO);
     }
 
     @ApiOperation(value = "Modifier un locataire")

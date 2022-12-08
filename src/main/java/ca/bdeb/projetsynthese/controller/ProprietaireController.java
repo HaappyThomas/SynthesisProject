@@ -1,9 +1,11 @@
 package ca.bdeb.projetsynthese.controller;
 
 import ca.bdeb.projetsynthese.dto.LoginDTO;
+import ca.bdeb.projetsynthese.dto.ProprietaireDTO;
 import ca.bdeb.projetsynthese.models.Proprietaire;
 import ca.bdeb.projetsynthese.services.ProprietaireService;
 import ca.bdeb.projetsynthese.vo.ProprietaireLoginVO;
+import ca.bdeb.projetsynthese.vo.ProprietaireVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -52,8 +54,8 @@ public class ProprietaireController {
 
     @ApiOperation(value = "Ajouter un proprietaire")
     @PostMapping("/add")
-    public Proprietaire add(@RequestBody Proprietaire proprietaire) {
-        return service.add(proprietaire);
+    public ProprietaireVO add(@RequestBody ProprietaireDTO proprietaireDTO) {
+        return service.add(proprietaireDTO);
     }
 
     @ApiOperation(value = "Update un proprietaire")

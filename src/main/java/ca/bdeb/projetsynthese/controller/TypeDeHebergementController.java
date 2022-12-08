@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/v1/typeDeHebergement")
+@RequestMapping("api/v1/type-de-hebergement")
 @Api(tags = "API pour type de hebergement")
 public class TypeDeHebergementController {
     @Autowired
